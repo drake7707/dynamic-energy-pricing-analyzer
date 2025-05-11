@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <title>Energy usage analyzer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel='stylesheet' href='main.css' />
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
+</head>
+
+<body>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Dynamic energy pricing analyzer</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label>Historical BELPEX energy prices* (<a href="https://my.elexys.be/MarketInformation/SpotBelpex.aspx">download</a>)</label>
+                    <input class="form-control" id="historicalFile" type="file" accept="text/csv">
+                </div>
+
+                <div class="form-group">
+                    <label>Quarter data from Fluvius* (<a href="https://mijn.fluvius.be/">download</a>)</label>
+                    <input class="form-control" id="quarterFile" type="file" accept="text/csv">
+                </div>
+                <div class="form-group">
+                    *The csv data will be stored in the browser storage and used if no files are selected, feel free to select a new file to use the latest data
+                </div>
+                <div class="form-group">
+                    <label>Formula for consumption</label>
+                    <br/>
+                    <span>(BELPEX is in €/MwH, the result should be in €/kwH, so if the formula is given in c€/kwH, don't forget to divide by 100 (/100)</span>
+                    <br/>
+                    <input class="form-control" id="formulaConsumption" type="text" value="(0.107 * BELPEX + 1.3) * 1.06 / 100">
+                </div>
+                <div class="form-group">
+                    <label>Formula for production</label>
+                    <br/>
+                    <span>(BELPEX is in €/MwH, the result should be in €/kwH, so if the formula is given in c€/kwH, don't forget to divide by 100 (/100)</span>
+                    <br/>
+                    <input class="form-control" id="formulaProduction" type="text" value="(0.107 * BELPEX + 1.3) * 1.06 / 100">
+                </div>
+
+                <div class="form-group">
+                    <label>Period</label>
+                    <label>from </label>
+                    <input class="form-control" type="date" id="fromDate" value="2024-01-01" />
+                    <label>to </label>
+                    <input class="form-control" type="date" id="toDate" value="2025-01-01" />
+                </div>
+                <br/>
+                <button class="btn btn-primary" id="analyzeBtn">Analyze</button>
+
+                <div id="results">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src='main.js'></script>
+</body>
+
+</html>
