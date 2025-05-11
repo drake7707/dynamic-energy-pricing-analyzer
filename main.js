@@ -131,7 +131,7 @@ function loadQuarterData() {
                     quarterDataUsage = {};
                     quarterFile = document.body.querySelector("#quarterFile").files[0];
                     if (typeof quarterFile === "undefined") {
-                        if (localStorage.getItem("quarterData") === null) {
+                        if (localStorage.getItem("quarterDataUsage") === null || localStorage.getItem("quarterDataProduction") === null) {
                             alert("No local csv data is stored yet, select quarter data file");
                             return [2 /*return*/, null];
                         }
